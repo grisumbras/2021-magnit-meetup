@@ -1,0 +1,103 @@
+== Другие применения адаптеров
+Многие функции Qt возвращают последовательности указателей на базовые классы:
+
+* `QObject`
+* `QWidget`
+* `QGraphicsItem`
+
+== Методы приведения типов
+* `dynamic_cast`
+* `static_cast`
+* `qobject_cast`
+
+[%notitle]
+== Пример приведения типа
+[source,c++,linenums]
+----
+include::../test/downcasting.cpp[tag=caster]
+
+include::../test/downcasting.cpp[tag=iterate0]
+----
+
+== `boost::adaptors::filtered`
+[source,c++,linenums]
+----
+include::../test/downcasting.cpp[tag=iterate1]
+----
+
+== `boost::for_each`
+[source,c++,linenums]
+----
+include::../test/downcasting.cpp[tag=iterate2]
+----
+
+[source,c++,linenums,step=1]
+----
+include::../test/downcasting.cpp[tag=iterate3]
+----
+
+== Свой адаптер приведения типа
+* Функциональный объект, переопределяющий `operator|`
+* Диапазон (`boost::iterator_range`)
+* Итератор (Boost.StlInterfaces)
+
+[%notitle]
+== Объявление итератора приведения
+[source,c++,linenums]
+----
+include::../test/downcasting.cpp[tag=cast_iter_begin]
+  ...
+include::../test/downcasting.cpp[tag=cast_iter_end]
+----
+<1> CRTP
+<2> Категория итератора
+<3> Тип значения
+<4> Тип ссылки
+
+[%notitle]
+== Фильтруюущая часть
+[source,c++,linenums]
+----
+include::../test/downcasting.cpp[tag=cast_iter_filter]
+
+include::../test/downcasting.cpp[tag=cast_iter_advance]
+----
+<1> Кэшируем полученное значение
+
+
+[%notitle]
+== Трансформирующая часть
+[%step.fade-out]
+--
+[source,c++,linenums]
+----
+include::../test/downcasting.cpp[tag=cast_iter_trans]
+----
+--
+
+[%step]
+--
+[source,c++,linenums]
+----
+include::../test/downcasting.cpp[tag=cast_iter_trans2]
+----
+<1> Тип значения -- `T`
+--
+
+[%notitle.columns]
+== Приведение: сравним исходный цикл и результирующий
+[.column]
+--
+[source,c++,linenums]
+----
+include::../test/downcasting.cpp[tag=iterate4]
+----
+--
+
+[%step.column]
+--
+[source,c++,linenums]
+----
+include::../test/downcasting.cpp[tag=iterate0]
+----
+--

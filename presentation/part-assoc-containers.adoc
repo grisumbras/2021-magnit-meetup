@@ -1,0 +1,23 @@
+== Ассоциативные контейнеры Qt
+* QHash
+* QMap
+* QJsonObject
+
+== `QJsonObject::iterator`
+
+image::qjsonobject_iterator_iface.jpg[]
+
+[%notitle]
+== Адаптер `QJsonObject::iterator`
+[source,c++,linenums]
+----
+include::../test/assoc_containers.cpp[tag=iter_begin]
+include::../test/assoc_containers.cpp[tag=iter_star]
+----
+
+[%notitle]
+== Используем адаптер `QJsonObject::iterator`
+[source,c++,linenums]
+----
+include::../test/assoc_containers.cpp[tag=use]
+----

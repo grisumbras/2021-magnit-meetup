@@ -1,11 +1,41 @@
+file(GLOB parts
+  CONFIGURE_DEPENDS
+  LIST_DIRECTORIES false
+  part-*.adoc
+)
+
+file(GLOB pics
+  CONFIGURE_DEPENDS
+  LIST_DIRECTORIES false
+  *.jpg
+)
+
+file(GLOB styles
+  CONFIGURE_DEPENDS
+  LIST_DIRECTORIES false
+  *.css
+)
+
+file(GLOB cpp_sources
+  CONFIGURE_DEPENDS
+  LIST_DIRECTORIES false
+  ../test/*.cpp
+)
+
 add_custom_command(
   OUTPUT presentation.html
   COMMAND bundler exec asciidoctor-revealjs
     -R "${CMAKE_CURRENT_SOURCE_DIR}"
     -D "${CMAKE_CURRENT_BINARY_DIR}"
-    -a revealjsdir=https://cdn.jsdelivr.net/npm/reveal.js@3.9.2
+    -a attribute-missing=warn
+    --failure-level=WARN
     "${CMAKE_CURRENT_SOURCE_DIR}/presentation.adoc"
   MAIN_DEPENDENCY presentation.adoc
+  DEPENDS
+    ${pics}
+    ${styles}
+    ${cpp_sources}
+    ${parts}
   WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
 )
 
@@ -16,3 +46,11 @@ add_custom_target(
   COMMENT "Generating presentation"
 )
 
+include(GNUInstallDirs)
+install(
+  FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/presentation.html"
+    ${pics}
+    ${styles}
+    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}"
+)

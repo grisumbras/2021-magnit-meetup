@@ -1,0 +1,23 @@
+.reveal {
+  font-size: 34px;
+}
+
+.reveal .slide-number {
+  bottom: auto;
+  top: 8px;
+  font-size: 16px;
+}
+
+.reveal h1, .reveal h2, .reveal h3 {
+  text-transform: none;
+}
+
+.reveal .highlightjs {
+  max-width: 800px;
+  font-size: 0.7em;
+}
+
+.reveal .highlightjs code {
+  overflow: hidden;
+  max-height: 900px;
+}

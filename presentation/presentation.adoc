@@ -1,7 +1,22 @@
-= Qt + Boost + STL
+= Qt + STL + Boost.Ranges
+:revealjsdir: https://cdn.jsdelivr.net/npm/reveal.js@3.9.2
+:revealjs_theme: white
+:revealjs_width: 1600
+:revealjs_height: 900
+:revealjs_margin: 0
+:revealjs_slideNumber: true
+:revealjs_hash: true
+:source-highlighter: highlightjs
+:highlightjs-theme: https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/default.min.css
+:customcss: theme.css
+:icons: font
 
-== Редактор Торгового Зала
+include::part-intro.adoc[]
 
-* Разрабатывется с 2012-го года
-* Использует Qt 5 для создания GUI
-* На текущий момент собирается с поддержкой {cpp}17
+include::part-running-meter.adoc[]
+
+include::part-downcasting.adoc[]
+
+include::part-assoc-containers.adoc[]
+
+include::part-row-range.adoc[]
