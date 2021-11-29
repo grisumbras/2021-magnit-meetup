@@ -40,7 +40,7 @@ include::../test/running_meter.cpp[tag=meter_bounded]
 
 [.column]
 --
-[source,c++,linenums]
+[source,c++,linenums,highlight='|6..9']
 ----
 include::../test/running_meter.cpp[tag=alt1]
 ----
@@ -48,39 +48,18 @@ include::../test/running_meter.cpp[tag=alt1]
 
 [.column]
 --
-[source,c++,linenums]
+[source,c++,linenums,highlight='|6..9']
 ----
 include::../test/running_meter.cpp[tag=alt1_bounded]
 ----
 --
-
-//
-[%notitle.columns.smaller]
-== Сравнение двух функций (c выделением)
-
-[.column]
---
-[source,c++,linenums,highlight=7..13]
-----
-include::../test/running_meter.cpp[tag=alt1]
-----
---
-
-[.column]
---
-[source,c++,linenums,highlight=7..13]
-----
-include::../test/running_meter.cpp[tag=alt1_bounded]
-----
---
-
 
 [.columns]
 == `std::accumulate`
 
 [.column]
 --
-[source,c++,linenums]
+[source,c++,linenums,highlight='|4..5']
 ----
 include::../test/running_meter.cpp[tag=alt2]
 ----
@@ -88,7 +67,7 @@ include::../test/running_meter.cpp[tag=alt2]
 
 [.column]
 --
-[source,c++,linenums]
+[source,c++,linenums,highlight='|4..5']
 ----
 include::../test/running_meter.cpp[tag=alt2_bounded]
 ----

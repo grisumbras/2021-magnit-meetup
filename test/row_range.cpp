@@ -154,16 +154,19 @@ int main()
       if (!predicate(index)) continue;
 
       model.setData(index, 1, MyRole);
-      model.setData(index.siblingAtColumn(1), 2, MyRole);
+      model.setData(
+        index.siblingAtColumn(1), 2, MyRole);
   }
   // end::row-iterate0[]
 
   // tag::row-iterate1[]
-  auto rows = rowRange({}, 0, &model) | filtered(predicate);
+  auto rows = rowRange({}, 0, &model)
+    | filtered(predicate);
   for (QModelIndex index: rows)
   {
       model.setData(index, 1, MyRole);
-      model.setData(index.siblingAtColumn(1), 2, MyRole);
+      model.setData(
+        index.siblingAtColumn(1), 2, MyRole);
   }
   // end::row-iterate1[]
 

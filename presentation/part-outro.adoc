@@ -1,0 +1,42 @@
+== Что мы получили?
+
+[%step]
+* Вместо своего кода используем библиотечный
+** Не надо поддерживать
+** За вас его тестируют другие люди
+* Лучше взаимодействие с элементами языка
+** range-for
+** structured bindings
+* Выделили часто используемой код в отдельные компоненты
+** Легче писать модульные тесты
+* Компактные легко читаемые функции
+
+== Исходники презентации
+https://github.com/grisumbras/2021-magnit-meetup[window=_blanc]
+
+
+[.columns.blue-background]
+== Связаться с нами
+
+[.column.hires]
+--
+Мы в поисках:
+
+image:teamlead-cxx.png[width=120px] TeamLead {cpp}
+
+image:senior-dev-cxx.png[width=120px] Senior developer {cpp}
+
+image:dev-cxx.png[width=120px] Developer {cpp}
+--
+
+[.column.contacts]
+--
+Контакты:
+
+image:e-mail.png[width=120px] tech_cv@magnit.ru
+
+image:www.png[width=120px] https://www.magnit.tech
+
+image:fb.png[width=120px] https://facebook.com/magnittech
+
+--

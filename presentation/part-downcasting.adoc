@@ -12,7 +12,7 @@
 
 [%notitle]
 == Пример приведения типа
-[source,c++,linenums]
+[source,c++,linenums,highlight='11..18|1..9|15']
 ----
 include::../test/downcasting.cpp[tag=caster]
 
@@ -20,7 +20,7 @@ include::../test/downcasting.cpp[tag=iterate0]
 ----
 
 == `boost::adaptors::filtered`
-[source,c++,linenums]
+[source,c++,linenums,highlight='3']
 ----
 include::../test/downcasting.cpp[tag=iterate1]
 ----
@@ -31,11 +31,6 @@ include::../test/downcasting.cpp[tag=iterate1]
 include::../test/downcasting.cpp[tag=iterate2]
 ----
 
-[source,c++,linenums,step=1]
-----
-include::../test/downcasting.cpp[tag=iterate3]
-----
-
 == Свой адаптер приведения типа
 * Функциональный объект, переопределяющий `operator|`
 * Диапазон (`boost::iterator_range`)
@@ -43,7 +38,7 @@ include::../test/downcasting.cpp[tag=iterate3]
 
 [%notitle]
 == Объявление итератора приведения
-[source,c++,linenums]
+[source,c++,linenums,highlight='|3|3..4|5|6|7|8']
 ----
 include::../test/downcasting.cpp[tag=cast_iter_begin]
   ...
@@ -54,9 +49,8 @@ include::../test/downcasting.cpp[tag=cast_iter_end]
 <3> Тип значения
 <4> Тип ссылки
 
-[%notitle]
 == Фильтруюущая часть
-[source,c++,linenums]
+[source,c++,linenums,highlight='|1|3|8|14|16']
 ----
 include::../test/downcasting.cpp[tag=cast_iter_filter]
 
@@ -65,24 +59,26 @@ include::../test/downcasting.cpp[tag=cast_iter_advance]
 <1> Кэшируем полученное значение
 
 
-[%notitle]
 == Трансформирующая часть
-[%step.fade-out]
---
 [source,c++,linenums]
 ----
 include::../test/downcasting.cpp[tag=cast_iter_trans]
 ----
---
 
-[%step]
---
-[source,c++,linenums]
+== Возвращаем ссылку
+[source,c++,linenums,highlight='|6,8..9']
 ----
 include::../test/downcasting.cpp[tag=cast_iter_trans2]
 ----
 <1> Тип значения -- `T`
---
+
+== Адаптер
+[source,c++,linenums,highlight='|7..11|17']
+----
+include::../test/downcasting.cpp[tag=cast_adaptor]
+----
+<1> Создание диапазона (`boost::iterator_range`)
+<2> Boost.HOF
 
 [%notitle.columns]
 == Приведение: сравним исходный цикл и результирующий

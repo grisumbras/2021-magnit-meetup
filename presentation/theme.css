@@ -1,11 +1,22 @@
 .reveal {
   font-size: 34px;
+
+  background-image: url('magnit.png');
+  background-repeat: no-repeat;
+  background-position: 1% 95%;
+  background-size: auto 5%;
 }
 
 .reveal .slide-number {
-  bottom: auto;
-  top: 8px;
-  font-size: 16px;
+  bottom: 5%;
+  left: 50%;
+  right: auto;
+  width: 1.3em;
+  border-radius: 40% 0 40% 0;
+  font-size: 20px;
+  background-color: rgb(72, 68, 255);
+  color: white;
+  text-align: center;
 }
 
 .reveal h1, .reveal h2, .reveal h3 {
@@ -13,11 +24,37 @@
 }
 
 .reveal .highlightjs {
-  max-width: 800px;
+  max-width: 1000px;
   font-size: 0.7em;
+  width: 100%;
 }
 
 .reveal .highlightjs code {
   overflow: hidden;
   max-height: 900px;
+}
+
+.reveal span img {
+  border-color: white;
+}
+
+
+.reveal .controls .controls-arrow::before,
+.reveal .controls .controls-arrow::after {
+  background-color: rgb(72, 68, 255);
+}
+
+.reveal .slides .hires p,
+.reveal .slides .contacts p {
+  text-align: left;
+  padding-left: 20%;
+}
+
+.reveal .slides .hires p * ,
+.reveal .slides .contacts p * {
+  vertical-align: middle;
+}
+
+.reveal a {
+  color: black;
 }

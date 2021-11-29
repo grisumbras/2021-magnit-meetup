@@ -10,19 +10,19 @@
 * `data(int role)`
 
 == Построчный обход модели
-[source,c++,linenums]
+[source,c++,linenums,highlight='|6..8']
 ----
 include::../test/row_range.cpp[tag=row-iterate0]
 ----
 
 == `RowIterator`
-[source,c++,linenums]
+[source,c++,linenums,highlight='|4,12,14|5..6,13']
 ----
 include::../test/row_range.cpp[tag=row_iterator]
 ----
 
 == `RowRange`
-[source,c++,linenums]
+[source,c++,linenums,highlight='|6,8|10|12..14']
 ----
 include::../test/row_range.cpp[tag=row_range]
 ----
@@ -45,42 +45,3 @@ include::../test/row_range.cpp[tag=row-iterate0]
 include::../test/row_range.cpp[tag=row-iterate1]
 ----
 --
-
-== QSettings
-* Чтение и запись настроек
-* Поддержка разных бэкендов
-** Реестр Windows
-** Ini-файлы
-** CFPreferences API
-** Пользовательские бэкенды
-* Группировка настроек по категориям
-* **Последовательности данных**
-
-== Массив настроек
-[source,c++,linenums]
-----
-int size = settings.beginReadArray("logins"); <1>
-for (int i = 0; i < size; ++i)
-{
-  settings.setArrayIndex(i);
-  Login login;
-  login.userName = settings.value("userName").toString();
-  login.password = settings.value("password").toString();
-  logins.push_back(login);
-}
-settings.endArray(); <2>
-----
-<1> Открытие массива
-<2> Закрытие массива
-
-== Диапазон настроек
-[source,c++,linenums]
-----
-for (SettingsEntry entry: settingsArray(settings, "logins"))
-{
-  Login login;
-  login.userName = entry["userName"].toString();
-  login.password = entry["password"].toString();
-  logins.push_back(login);
-}
-----

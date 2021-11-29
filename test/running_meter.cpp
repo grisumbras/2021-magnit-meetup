@@ -40,15 +40,15 @@ int runningMeter(Shelves const& shelves)
 
 
 // tag::meter_bounded[]
-int runningMeter(Shelves const& shelves, int left, int right)
+int runningMeter(Shelves const& shelves, int l, int r)
 {
   int result = 0;
   for (Shelf shelf: shelves)
   {
-    int l = std::max(left, shelf.position.x);
-    int r = std::clamp(
-      shelf.position.x + shelf.size.width, l, right);
-    int width = r - l;
+    int x1 = std::max(l, shelf.position.x);
+    int x2 = std::clamp(
+      shelf.position.x + shelf.size.width, x1, r);
+    int width = x2 - x1;
     result += width;
   }
   return result;
@@ -60,14 +60,11 @@ namespace alternative1 {
 
 
 // tag::alt1[]
-int runningMeter(
-    Shelves const& shelves)
+int runningMeter(Shelves const& shelves)
 {
   int result = 0;
   for (Shelf shelf: shelves)
   {
-
-
 
 
 
@@ -80,18 +77,15 @@ int runningMeter(
 
 
 // tag::alt1_bounded[]
-int runningMeter(
-  Shelves const& shelves, int left, int right)
+int runningMeter(Shelves const& shelves, int l, int r)
 {
   int result = 0;
   for (Shelf shelf: shelves)
   {
-    int l = std::max(left, shelf.position.x);
-    int r = std::clamp(
-      shelf.position.x + shelf.size.width,
-      l,
-      right);
-    int width = r - l;
+    int x1 = std::max(l, shelf.position.x);
+    int x2 = std::clamp(
+      shelf.position.x + shelf.size.width, x1, r);
+    int width = x2 - x1;
     result += width;
   }
   return result;
@@ -106,16 +100,13 @@ namespace alternative2 {
 
 
 // tag::alt2[]
-int runningMeter(
-  Shelves const& shelves)
+int runningMeter(Shelves const& shelves)
 {
   return std::accumulate(
     shelves.begin(),
     shelves.end(),
     0,
     [=](int acc, Shelf shelf) {
-
-
 
 
 
@@ -127,20 +118,17 @@ int runningMeter(
 
 
 // tag::alt2_bounded[]
-int runningMeter(
-  Shelves const& shelves, int left, int right)
+int runningMeter(Shelves const& shelves, int l, int r)
 {
   return std::accumulate(
     shelves.begin(),
     shelves.end(),
     0,
     [=](int acc, Shelf shelf) {
-      int l = std::max(left, shelf.position.x);
-      int r = std::clamp(
-        shelf.position.x + shelf.size.width,
-        l,
-        right);
-      int width = r - l;
+      int x1 = std::max(l, shelf.position.x);
+      int x2 = std::clamp(
+        shelf.position.x + shelf.size.width, x1, r);
+      int width = x2 - x1;
       return acc + width;
     });
 }
@@ -154,16 +142,12 @@ namespace alternative3 {
 
 
 // tag::alt3[]
-int runningMeter(
-  Shelves const& shelves)
+int runningMeter(Shelves const& shelves)
 {
   return boost::accumulate(
     shelves,
     0,
     [=](int acc, Shelf shelf) {
-
-
-
 
 
 
@@ -175,19 +159,16 @@ int runningMeter(
 
 
 // tag::alt3_bounded[]
-int runningMeter(
-  Shelves const& shelves, int left, int right)
+int runningMeter(Shelves const& shelves, int l, int r)
 {
   return boost::accumulate(
     shelves,
     0,
     [=](int acc, Shelf shelf) {
-      int l = std::max(left, shelf.position.x);
-      int r = std::clamp(
-        shelf.position.x + shelf.size.width,
-        l,
-        right);
-      int width = r - l;
+      int x1 = std::max(l, shelf.position.x);
+      int x2 = std::clamp(
+        shelf.position.x + shelf.size.width, x1, r);
+      int width = x2 - x1;
       return acc + width;
     });
 }
@@ -213,8 +194,7 @@ int shelfWidth(Shelf const& shelf) {
 
 
 
-int runningMeter(
-  Shelves const& shelves)
+int runningMeter(Shelves const& shelves)
 {
   return boost::accumulate(
     shelves | transformed(shelfWidth),
@@ -224,20 +204,19 @@ int runningMeter(
 
 
 // tag::alt4_bounded[]
-auto clippedWidth(int left, int right) {
+auto clippedWidth(int l, int r) {
   return [=](Shelf shelf) {
-    int l = std::max(left, shelf.position.x);
-    int r = std::clamp(
-      shelf.position.x + shelf.size.width, l, right);
-    return r - l;
+    int x1 = std::max(l, shelf.position.x);
+    int x2 = std::clamp(
+      shelf.position.x + shelf.size.width, x1, r);
+    return x2 - x1;
   };
 }
 
-int runningMeter(
-    Shelves const& shelves, int left, int right)
+int runningMeter(Shelves const& shelves, int l, int r)
 {
   return boost::accumulate(
-    shelves | transformed(clippedWidth(left, right)),
+    shelves | transformed(clippedWidth(l, r)),
     0);
 }
 // end::alt4_bounded[]

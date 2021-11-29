@@ -9,7 +9,8 @@
 #include <QObject>
 
 
-class MyClass : public QObject {};
+class MyClass : public QObject { using QObject::QObject; };
+class OtherClass : public QObject { using QObject::QObject; };
 
 
 constexpr
@@ -28,10 +29,10 @@ struct SomethingDoer {
 
 #if defined(CAST_ITER_POINTER)
 // tag::cast_iter_begin[]
-template <class ForwardIterator, class T>
+template <class It, class T>
 class DynamicFilterIterator
   : public boost::stl_interfaces::iterator_interface<
-      DynamicFilterIterator<ForwardIterator, T>, // <1>
+      DynamicFilterIterator<It, T>, // <1>
       std::forward_iterator_tag, // <2>
       T*, // <3>
       T*> // <4>
@@ -39,10 +40,10 @@ class DynamicFilterIterator
 // end::cast_iter_begin[]
 #else
 // tag::cast_iter_trans2[]
-template <class ForwardIterator, class T>
+template <class It, class T>
 class DynamicFilterIterator
   : public boost::stl_interfaces::iterator_interface<
-      DynamicFilterIterator<ForwardIterator, T>,
+      DynamicFilterIterator<It, T>,
       std::forward_iterator_tag,
       T> // <1>
 {
@@ -66,7 +67,7 @@ public:
   DynamicFilterIterator() = default;
 
 // tag::cast_iter_filter[]
-  DynamicFilterIterator(ForwardIterator first, ForwardIterator last)
+  DynamicFilterIterator(It first, It last)
     : last_(last)
     , it_(advance(first))
   {}
@@ -80,7 +81,7 @@ public:
 
 private:
 // tag::cast_iter_advance[]
-  ForwardIterator advance(ForwardIterator it)
+  It advance(It it)
   {
       return std::find_if(
         it, last_, [this](QObject* object) -> bool {
@@ -91,32 +92,37 @@ private:
 
   friend boost::stl_interfaces::access;
 
-  constexpr ForwardIterator& base_reference() noexcept { return it_; }
-  constexpr ForwardIterator base_reference() const noexcept { return it_; }
+  constexpr It& base_reference() noexcept { return it_; }
+  constexpr It base_reference() const noexcept { return it_; }
 
 // tag::cast_iter_end[]
 private:
-  ForwardIterator last_;
-  ForwardIterator it_;
+  It last_;
+  It it_;
   T* val_ = nullptr;
 };
 // end::cast_iter_end[]
 
 
+// tag::cast_adaptor[]
 template <class T> struct DynamicFilter {
   template <class Range>
   auto operator()(Range&& rng) const
   {
-      using SrcIterator = decltype(rng.begin());
-      using TgtIterator = DynamicFilterIterator<SrcIterator, T>;
-      return boost::make_iterator_range(
-        TgtIterator(rng.begin(), rng.end()),
-        TgtIterator(rng.end(), rng.end()));
+    using SrcIterator = decltype(rng.begin());
+    using TgtIterator = DynamicFilterIterator<SrcIterator, T>;
+    SrcIterator first = rng.begin();
+    SrcIterator last = rng.end();
+    return boost::make_iterator_range( // <1>
+      TgtIterator(first, last),
+      TgtIterator(last, last));
   }
 };
 
 template <class T>
-constexpr auto dynamic_filter = boost::hof::pipable(DynamicFilter<T>());
+constexpr auto dynamic_filter
+  = boost::hof::pipable(DynamicFilter<T>()); // <2>
+// end::cast_adaptor[]
 
 
 // tag::caster[]
@@ -132,11 +138,21 @@ template <class To> constexpr DynamicCaster<To> dynamic_caster;
 // end::caster[]
 
 
+void addChildren(QObject& object)
+{
+  MyClass* kid1 = new MyClass(&object);
+  (void)kid1;
+  OtherClass* kid2 = new OtherClass(&object);
+  (void)kid2;
+}
+
+
 void iterate0()
 {
   using boost::adaptors::transformed;
 
   QObject object;
+  addChildren(object);
 
 // tag::iterate0[]
 auto kids = object.children()
@@ -157,11 +173,12 @@ void iterate1()
   using boost::adaptors::filtered;
 
   QObject object;
+  addChildren(object);
 
 // tag::iterate1[]
 auto kids = object.children()
   | transformed(dynamic_caster<MyClass*>)
-  | transformed(std::identity())
+  | filtered(std::identity())
   ;
 for (MyClass* kid: kids)
 {
@@ -177,11 +194,12 @@ void iterate2()
   using boost::adaptors::filtered;
 
   QObject object;
+  addChildren(object);
 
 // tag::iterate2[]
 auto kids = object.children()
   | transformed(dynamic_caster<MyClass*>)
-  | transformed(std::identity())
+  | filtered(std::identity())
   ;
 boost::for_each(kids, do_something);
 // end::iterate2[]
@@ -194,12 +212,13 @@ void iterate3()
   using boost::adaptors::filtered;
 
   QObject object;
+  addChildren(object);
 
 // tag::iterate3[]
 boost::for_each(
   object.children()
     | transformed(dynamic_caster<MyClass*>)
-    | transformed(std::identity()),
+    | filtered(std::identity()),
   do_something);
 // end::iterate3[]
 }
@@ -208,6 +227,7 @@ boost::for_each(
 void iterate4()
 {
   QObject object;
+  addChildren(object);
 
 // tag::iterate4[]
   boost::for_each(

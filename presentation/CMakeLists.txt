@@ -7,7 +7,7 @@ file(GLOB parts
 file(GLOB pics
   CONFIGURE_DEPENDS
   LIST_DIRECTORIES false
-  *.jpg
+  *.jpg *.png
 )
 
 file(GLOB styles
@@ -20,6 +20,12 @@ file(GLOB cpp_sources
   CONFIGURE_DEPENDS
   LIST_DIRECTORIES false
   ../test/*.cpp
+)
+
+file(GLOB fonts
+  CONFIGURE_DEPENDS
+  LIST_DIRECTORIES false
+  *.otf
 )
 
 add_custom_command(
@@ -36,6 +42,7 @@ add_custom_command(
     ${styles}
     ${cpp_sources}
     ${parts}
+    ${fonts}
   WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
 )
 
@@ -52,5 +59,6 @@ install(
     "${CMAKE_CURRENT_BINARY_DIR}/presentation.html"
     ${pics}
     ${styles}
+    ${fonts}
     DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}"
 )

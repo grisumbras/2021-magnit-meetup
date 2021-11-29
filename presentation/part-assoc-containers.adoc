@@ -9,7 +9,7 @@ image::qjsonobject_iterator_iface.jpg[]
 
 [%notitle]
 == Адаптер `QJsonObject::iterator`
-[source,c++,linenums]
+[source,c++,linenums,highlight='|5|6,12..13|7,9..10']
 ----
 include::../test/assoc_containers.cpp[tag=iter_begin]
 include::../test/assoc_containers.cpp[tag=iter_star]

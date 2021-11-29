@@ -1,4 +1,4 @@
-= Qt + STL + Boost.Ranges
+= Qt + STL + Boost.Range
 :revealjsdir: https://cdn.jsdelivr.net/npm/reveal.js@3.9.2
 :revealjs_theme: white
 :revealjs_width: 1600
@@ -20,3 +20,7 @@ include::part-downcasting.adoc[]
 include::part-assoc-containers.adoc[]
 
 include::part-row-range.adoc[]
+
+include::part-qsettings.adoc[]
+
+include::part-outro.adoc[]
