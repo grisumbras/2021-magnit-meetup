@@ -22,7 +22,7 @@ include::../test/row_range.cpp[tag=row_iterator]
 ----
 
 == `RowRange`
-[source,c++,linenums,highlight='|6,8|10|12..14']
+[source,c++,linenums,highlight='|1|4..6|6,8|10|12..14']
 ----
 include::../test/row_range.cpp[tag=row_range]
 ----

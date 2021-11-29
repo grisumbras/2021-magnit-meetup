@@ -59,8 +59,8 @@ public:
 // end::cast_iter_trans[]
 #else
 // tag::cast_iter_trans2[]
-  T& operator*()       { return *val_; }
-  T& operator*() const { return *val_; }
+  T&       operator*()       { return *val_; }
+  T const& operator*() const { return *val_; }
 // end::cast_iter_trans2[]
 #endif
 
