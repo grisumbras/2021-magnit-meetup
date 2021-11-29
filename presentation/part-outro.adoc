@@ -22,21 +22,21 @@ https://github.com/grisumbras/2021-magnit-meetup[window=_blanc]
 --
 Мы в поисках:
 
-image:teamlead-cxx.png[width=120px] TeamLead {cpp}
+image:teamlead-cxx.png[height=120px] TeamLead {cpp}
 
-image:senior-dev-cxx.png[width=120px] Senior developer {cpp}
+image:senior-dev-cxx.png[height=120px] Senior developer {cpp}
 
-image:dev-cxx.png[width=120px] Developer {cpp}
+image:dev-cxx.png[height=120px] Developer {cpp}
 --
 
 [.column.contacts]
 --
 Контакты:
 
-image:e-mail.png[width=120px] tech_cv@magnit.ru
+image:e-mail.png[width=80px] tech_cv@magnit.ru
 
-image:www.png[width=120px] https://www.magnit.tech
+image:www.png[width=80px] https://www.magnit.tech
 
-image:fb.png[width=120px] https://facebook.com/magnittech
+image:fb.png[width=80px] https://facebook.com/magnittech
 
 --
